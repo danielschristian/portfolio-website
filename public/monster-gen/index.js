@@ -44,9 +44,8 @@ function genNPC() {
         raceSelected = pullRandomRace();
     }
     const npcList = document.getElementById("npcContainer")
-    npcList.innerHTML += '<h5>' 
-    + incrementList() 
-    + ': A ' 
+    npcList.innerHTML = '<h5>' 
+    + 'A ' 
     + pullRandomAdj() 
     + ', ' 
     + pullRandomAdj() 
@@ -65,6 +64,7 @@ function genNPC() {
     + pullRandomPronouns()
     + ')'
     +'</h5>'
+    + npcList.innerHTML
 
     // document.cookie = 'saved = ' + document.getElementById("npcContainer") + '; path:/'
 }
