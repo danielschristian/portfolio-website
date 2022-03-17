@@ -1,10 +1,12 @@
-//cookie logic
-//© <Jan 24 2022> <peterbe> <https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie>
-// if (document.cookie.split('; ').find(row => row.startsWith('saved'))) {
-//     const container = document.getElementById("npcContainer")
-//     document.cookie
-    
-//     }
+//check for existing local storage
+if (window.localStorage) {
+    var existingList = localStorage.getItem('existingList')
+    const npcList = document.getElementById("npcContainer")
+    npcList.innerHTML = existingList
+}
+else {
+    localStorage.setItem('existingList', '');
+}
 
 //only used to increment list amount, probably easier than counting everytime
 var highestAmt = 1
@@ -66,7 +68,10 @@ function genNPC() {
     +'</h5>'
     + npcList.innerHTML
 
-    // document.cookie = 'saved = ' + document.getElementById("npcContainer") + '; path:/'
+    //update local storage
+    localStorage.setItem('existingList', npcList.innerHTML)
+
+
 }
 
 function pullRandomAdj() {
