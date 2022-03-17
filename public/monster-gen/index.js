@@ -388,6 +388,7 @@ const nameList3 = ['Abbelinus','Abragasia','Abrecan','Abronilli','Adefonsus','Ad
 
 var FirstName = nameList3[getRandomIntInclusive(0, (nameList3.length - 1))]
 
+FirstName = FirstName.charAt(0).toUpperCase() + FirstName.slice(1)
 
 
 const LastName = prefixList[getRandomIntInclusive(0, (prefixList.length - 1))] + prefix2List[getRandomIntInclusive(0, (prefix2List.length - 1))]
