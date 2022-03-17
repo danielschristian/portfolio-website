@@ -126,6 +126,8 @@ function clearList() {
     document.getElementById("callNPCAmount").classList.remove("error")
     const npcList = document.getElementById("npcContainer")
     npcList.innerHTML = "";
+    //update local storage
+    localStorage.setItem('existingList', npcList.innerHTML)
     opacityCheck();
 }
 
