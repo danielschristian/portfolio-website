@@ -139,3 +139,17 @@ p, .list-item-body {
 
 }
 
+.error {
+    border-color: red;
+}
+
+#callNPCAmount {
+    border-radius: 4px;
+}
+
+.slider {
+    width: 100%;
+}
+
+
+

@@ -163,7 +163,9 @@ nav ul li a:hover {
     font-family: "Consolas";
 }
 
-
+h4 {
+    font-size: medium !important;
+}
 /* Mobile Styles */
 
 @media only screen and (max-device-width: 700px) {
@@ -197,3 +199,4 @@ nav ul li a:hover {
     
     
 }
+

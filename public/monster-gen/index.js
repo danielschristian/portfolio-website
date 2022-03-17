@@ -74,9 +74,8 @@ function genNPC() {
         NewNPC
         )
 
-    npcList.innerHTML = '<h5>'
-    + NewNPC.name
-    + ": "
+    npcList.innerHTML = '<h5 class="card-text">'
+    + '<mark>' + NewNPC.name + ': </mark>'
     + 'A ' 
     + NewNPC.firstAdj
     + ', ' 
@@ -96,7 +95,7 @@ function genNPC() {
     + NewNPC.pronouns
     + ')'
     +'</h5>'
-    +'<h4>'
+    +'<h4 style="font-size: medium" class="card-text">'
     + pullStats()
     
     +'</h4>'
