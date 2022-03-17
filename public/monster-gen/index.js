@@ -1,4 +1,8 @@
+//initalize
+
 const npcList = document.getElementById("npcContainer")
+var npcListArr = []
+
 //check for existing local storage
 if (window.localStorage) {
     var existingList = localStorage.getItem('existingList')
@@ -9,8 +13,12 @@ else {
 }
 
 opacityCheck();
+
+//end initalize
+
+
 //only used to increment list amount, probably easier than counting everytime
-//TODO: Kind of deprecated, maybe remove later since we use range now
+//TODO: Deprecated, maybe remove later since we use range now
 var highestAmt = 1
 function CallgenNPC() {
     const amountElement = document.getElementById("callNPCAmount")
@@ -34,6 +42,20 @@ function GenNPCWithAmount(amount) {
         }
     }
 }
+
+//object constructor
+function NPC(race, place, name, firstAdj, secondAdj, npcClass, adv, trait, pronouns) {
+    this.race = race
+    this.place = place
+    this.name = name
+    this.firstAdj = firstAdj
+    this.secondAdj = secondAdj
+    this.npcClass = npcClass
+    this.adv = adv
+    this.trait = trait
+    this.pronouns = pronouns
+}
+
 function genNPC() {
     const raceSelectedElement = document.getElementById("raceSelect")
     var raceSelected = raceSelectedElement.options[raceSelectedElement.selectedIndex].text
@@ -47,37 +69,45 @@ function genNPC() {
     if(raceSelected == "Random") {
         raceSelected = pullRandomRace();
     }
-    
+    var NewNPC = new NPC(raceSelected, placeSelected, pullRandomName(), pullRandomAdj(), pullRandomAdj(), pullRandomClass(), pullRandomAdv(), pullRandomTrait(), pullRandomPronouns())
+    npcListArr.push(
+        NewNPC
+        )
+
     npcList.innerHTML = '<h5>'
-    + pullRandomName()
+    + NewNPC.name
     + ": "
     + 'A ' 
-    + pullRandomAdj() 
+    + NewNPC.firstAdj
     + ', ' 
-    + pullRandomAdj() 
+    + NewNPC.secondAdj
     + ', ' 
-    + pullRandomClass() 
+    + NewNPC.npcClass
     + ' ' 
-    + raceSelected 
+    + NewNPC.race
     +
     ' from ' 
-    + placeSelected
+    + NewNPC.place
     + ' who is '
-    + pullRandomAdv()
+    + NewNPC.adv
     + ' '
-    + pullRandomTrait()
+    + NewNPC.trait
     + ' ('
-    + pullRandomPronouns()
+    + NewNPC.pronouns
     + ')'
     +'</h5>'
+    +'<h4>'
+    + pullStats()
+    
+    +'</h4>'
     + npcList.innerHTML
 
     //update local storage
     localStorage.setItem('existingList', npcList.innerHTML)
 
-    
     opacityCheck();
 }
+
 
 
 function opacityCheck() {
@@ -393,7 +423,9 @@ var FirstName = nameList3[getRandomIntInclusive(0, (nameList3.length - 1))]
 FirstName = FirstName.charAt(0).toUpperCase() + FirstName.slice(1)
 
 
-const LastName = prefixList[getRandomIntInclusive(0, (prefixList.length - 1))] + prefix2List[getRandomIntInclusive(0, (prefix2List.length - 1))]
+var LastName = prefixList[getRandomIntInclusive(0, (prefixList.length - 1))] + prefix2List[getRandomIntInclusive(0, (prefix2List.length - 1))]
+
+LastName = LastName.charAt(0).toUpperCase() + LastName.slice(1)
 
 
     return FirstName + ' ' + LastName
@@ -406,4 +438,29 @@ var output = document.getElementById("sliderNum");
 slider.oninput = function() {
     output.innerHTML = this.value;
   } 
+
+function pullStats() {
+    console.log("pull stat")
+    var NPCToCheck = npcListArr[npcListArr.length]
+    //Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1)					
+    var statList = [' 16',' 15',' 13',' 12',' 9',' 8']
+    var returnList = ''
+
+    function pullStatandRemove(random) {
+        console.log(statList)
+        var statlistReturn = statList[random]
+        statList.splice(random, 1)
+        console.log(statList)
+        return statlistReturn
+    }
+    returnList += " STR: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+    returnList += " DEX: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+    returnList += " CON: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+    returnList += " INT: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+    returnList += " WIS: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+    returnList += " CHA: " + pullStatandRemove(getRandomIntInclusive(0, statList.length - 1))
+
+    return returnList
+
+}
 
