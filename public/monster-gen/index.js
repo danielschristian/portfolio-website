@@ -463,10 +463,3 @@ function pullStats() {
 
 }
 
-
-function copyText() {
-    const copiedValue = npcList.innerHTML.value
-    copiedValue.select();
-    navigator.clipboard.writeText(copiedValue);
-}
-
